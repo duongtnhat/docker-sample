@@ -64,4 +64,13 @@ Rails.application.configure do
   logger           = ActiveSupport::Logger.new(STDOUT)
   logger.formatter = config.log_formatter
   config.logger = ActiveSupport::TaggedLogging.new(logger)
+
+  config.logstasher.enabled = true
+  config.logstasher.controller_enabled = true
+  config.logstasher.mailer_enabled = true
+  config.logstasher.record_enabled = true
+  config.logstasher.view_enabled = true
+  config.logstasher.job_enabled = true
+  config.logstasher.suppress_app_log = true
+  config.logstasher.backtrace = false
 end

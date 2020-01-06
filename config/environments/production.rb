@@ -86,12 +86,19 @@ Rails.application.configure do
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
-  if ENV["RAILS_LOG_TO_STDOUT"].present?
-    logger           = ActiveSupport::Logger.new(STDOUT)
-    logger.formatter = config.log_formatter
-    config.logger    = ActiveSupport::TaggedLogging.new(logger)
-  end
-
+  config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  logger           = ActiveSupport::Logger.new(STDOUT)
+  logger.formatter = config.log_formatter
+  config.logger = ActiveSupport::TaggedLogging.new(logger)
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.logstasher.enabled = true
+  config.logstasher.controller_enabled = true
+  config.logstasher.mailer_enabled = true
+  config.logstasher.record_enabled = true
+  config.logstasher.view_enabled = true
+  config.logstasher.job_enabled = true
+  config.logstasher.suppress_app_log = true
+  config.logstasher.backtrace = false
 end
